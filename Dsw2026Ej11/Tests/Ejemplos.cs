@@ -129,6 +129,73 @@ internal class Ejemplos
     //Realizar una llamada a cada método definido en CasoLinq y mostar por consola según corresponda
     public static void EjemploLinq()
     {
+        CasoLinq gestorLinq = new CasoLinq();
+
+        Console.WriteLine("Primer Libro");
+        Libro primerLibro = gestorLinq.GetPrimero();
+        Console.WriteLine($"Título: {primerLibro?.Titulo} - Precio: {primerLibro?.Precio:C}\n");
+
+        Console.WriteLine("Último Libro");
+        Libro ultimoLibro = gestorLinq.GetUltimo();
+        Console.WriteLine($"Título: {ultimoLibro?.Titulo} - Precio: {ultimoLibro?.Precio:C}\n");
+
+        Console.WriteLine("Suma total de Precios");
+        decimal total = (decimal)gestorLinq.GetTotalPrecios();
+        Console.WriteLine($"Total de toda la librería: {total:C}\n");
+
+        Console.WriteLine("Promedio de Precios");
+        decimal promedio = (decimal)gestorLinq.GetPromedioPrecios();
+        Console.WriteLine($"Promedio de precios es de: {promedio:C}\n");
+
+        Console.WriteLine("Libros con Id mayor a 15");
+        List<Libro> librosMayor15 = gestorLinq.GetListById();
+        foreach (var libro in librosMayor15)
+        {
+            Console.WriteLine($"[Id: {libro.Id}] - Título: {libro.Titulo}");
+        }
+        Console.WriteLine();
+
+        Console.WriteLine("Libros Formateados");
+        List<string> textosLibros = gestorLinq.GetLibros();
+        foreach (var texto in textosLibros)
+        {
+            Console.WriteLine(texto);
+        }
+        Console.WriteLine();
+
+        Console.WriteLine("Libro más Caro");
+        Libro masCaro = gestorLinq.GetMayorPrecio();
+        Console.WriteLine($"Título: {masCaro?.Titulo} - Precio: {masCaro?.Precio:C}\n");
+
+        Console.WriteLine("Libro más Barato");
+        Libro masBarato = gestorLinq.GetMenorPrecio();
+        Console.WriteLine($"Título: {masBarato?.Titulo} - Precio: {masBarato?.Precio:C}\n");
+        
+        Console.WriteLine("Libros con precio Mayor al Promedio");
+        List<Libro> librosCaros = gestorLinq.GetMayorPromedio();
+        foreach (var libro in librosCaros)
+        {
+            Console.WriteLine($"- {libro.Titulo} ({libro.Precio:C})");
+        }
+        Console.WriteLine();
+
+        Console.WriteLine("Libros Ordenados por Título (de Z a la A)");
+        List<Libro> librosOrdenados = gestorLinq.GetOrdenadosPorTituloDescendente();
+        foreach (var libro in librosOrdenados)
+        {
+            Console.WriteLine($"- {libro.Titulo}");
+        }
+
+
+
+
+
+
+
+
+
+
+
 
     }
 }
