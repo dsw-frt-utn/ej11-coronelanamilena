@@ -9,19 +9,19 @@ internal class Ejemplos
     
     public static void EjemploList()
     {
-        CasoList gestor = new CasoList();
+        CasoList gestorList = new CasoList();
 
         //Agregar 3 alumnos a la lista
         Alumno a1 = new Alumno(1, "Morena Garcia", 9.0);
         Alumno a2 = new Alumno(2, "Pablo Perez", 6.7);
         Alumno a3 = new Alumno(3, "Anastacia Lopez", 8.3);
-        gestor.AgregarAlumno(a1);
-        gestor.AgregarAlumno(a2);
-        gestor.AgregarAlumno(a3);
+        gestorList.AgregarAlumno(a1);
+        gestorList.AgregarAlumno(a2);
+        gestorList.AgregarAlumno(a3);
 
         //Listar por consola los alumnos
         Console.WriteLine("Lista de Alumnos");
-        List<Alumno> listaActual = gestor.RetornaLista();
+        List<Alumno> listaActual = gestorList.RetornaLista();
         foreach (Alumno alumno in listaActual)
         {
             Console.WriteLine(alumno);
@@ -30,7 +30,7 @@ internal class Ejemplos
 
         //Buscar por nombre un alumno que exista y mostrar por consola
         Console.WriteLine("Buscando al alumno Anastacia Lopez");
-        Alumno alumnoEncontrado = gestor.BuscarAlumno("anastacia lopez");
+        Alumno alumnoEncontrado = gestorList.BuscarAlumno("anastacia lopez");
 
         if (alumnoEncontrado != null)
             Console.WriteLine($"Encontrado: {alumnoEncontrado}");
@@ -40,7 +40,7 @@ internal class Ejemplos
 
         //Buscar por nombre un alumno que no exista y mostrar por consola el texto "No existe"
         Console.WriteLine("Buscando al alumno Maria Marta Ruiz");
-        Alumno alumnoInexistente = gestor.BuscarAlumno("maria marta ruiz");
+        Alumno alumnoInexistente = gestorList.BuscarAlumno("maria marta ruiz");
 
         if (alumnoInexistente != null)
         {
@@ -52,9 +52,9 @@ internal class Ejemplos
 
         //Eliminar un alumno y listar por consola los alumnos
         Console.WriteLine("Eliminando al alumno Pablo Perez de la lista");
-        gestor.EliminarAlumno(a2);
+        gestorList.EliminarAlumno(a2);
 
-        foreach (Alumno alumno in gestor.RetornaLista())
+        foreach (Alumno alumno in gestorList.RetornaLista())
         {
             Console.WriteLine(alumno);
         }
@@ -62,20 +62,67 @@ internal class Ejemplos
 
         //Eliminar el primer elemento de la lista y listar por consola los alumnos
         Console.WriteLine("Eliminando al primer alumno del listado");
-        gestor.EliminarAlumnoPosicion(0); 
+        gestorList.EliminarAlumnoPosicion(0); 
 
-        foreach (Alumno alumno in gestor.RetornaLista())
+        foreach (Alumno alumno in gestorList.RetornaLista())
         { Console.WriteLine(alumno); }
 
     }
 
-    //Agregar 3 alumnos al diccionario
-    //Listar por consola los alumnos
-    //Buscar un alumno por clave y mostrar por consola
-    //Buscar un alumno por clave, pero que no exista, y mostrar por consola el texto "No existe"
-    //Eliminar un alumno por clave y listar por consola los alumnos
     public static void EjemploDictionary()
     {
+        CasoDictionary gestorD = new CasoDictionary();
+        //Agregar 3 alumnos al diccionario
+        Alumno a1 = new Alumno(245, "Mariana Gomez", 6.0);
+        Alumno a2 = new Alumno(246, "Leandro Miranda", 8.7);
+        Alumno a3 = new Alumno(247, "Ana Moron", 7.3);
+        gestorD.AgregarAlumno(a1);
+        gestorD.AgregarAlumno(a2);
+        gestorD.AgregarAlumno(a3);
+
+        //Listar por consola los alumnos
+        Dictionary<int, Alumno> diccionarioActual = gestorD.RetornaDic();
+        foreach (KeyValuePair<int, Alumno> par in diccionarioActual)
+
+        { Console.WriteLine($"Legajo: {par.Key}- Alumno: {par.Value}"); }
+
+        Console.WriteLine();
+
+        //Buscar un alumno por clave y mostrar por consola
+        Console.WriteLine("Buscando alumno con legajo '247'");
+        int legajoBuscado = 247;
+        Alumno? alumnoEncontrado = gestorD.BuscarAlumnoLegajo(legajoBuscado);
+
+        if (alumnoEncontrado != null)
+        {
+            Console.WriteLine($"Encontrado: {alumnoEncontrado}");
+        }
+        else
+        {
+            Console.WriteLine("No existe alumno con el legajo ingresado");
+        }
+        Console.WriteLine();
+
+        //Buscar un alumno por clave, pero que no exista, y mostrar por consola el texto "No existe"
+        Console.WriteLine("Buscando alumno con legajo '249'");
+        int legajoInexistente = 249;
+        Alumno? alumnoInexistente = gestorD.BuscarAlumnoLegajo(legajoInexistente);
+
+        if (alumnoInexistente!= null)
+        {  Console.WriteLine($"Encontrado: {alumnoInexistente}");  }
+        else
+        {
+            Console.WriteLine("No existe");
+        }
+        Console.WriteLine();
+
+        //Eliminar un alumno por clave y listar por consola los alumnos
+        Console.WriteLine("Eliminando al alumno con legajo '246' ");
+        gestorD.EliminarAlumnoLegajo(246);
+        foreach (KeyValuePair<int, Alumno> par in gestorD.RetornaDic())
+    {
+            Console.WriteLine($"Legajo: {par.Key}- Alumno: {par.Value}");
+        }
 
     }
 
